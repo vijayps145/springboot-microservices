@@ -16,7 +16,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     // Build Save Employee REST API
-    @PostMapping
+    @PostMapping("addEmployee")
     public ResponseEntity<EmployeeDto> saveEmployee(@RequestBody EmployeeDto employeeDto){
         EmployeeDto savedEmployee = employeeService.saveEmployee(employeeDto);
         return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
