@@ -1,0 +1,39 @@
+server:
+  port: 7858
+
+spring:
+  kafka:
+    consumer:
+      # auto-offset-reset: earliest
+      enable-auto-commit: true
+      auto-commit-interval: 1000 # If auto-commit is enabled, controls the interval
+      group-id: myGroup
+      bootstrap-servers: localhost:9092
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      retries: 3
+      acks: all
+      properties:
+        enable.idempotence: true
+
+
+    topic:
+      name: javaguides
+    topic-json:
+      name: javaguides_json
+
+  logging:
+    level:
+      org.springframework.kafka: DEBUG
+      org.apache.kafka: DEBUG
+
